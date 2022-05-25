@@ -1,10 +1,10 @@
 import 'package:auto_route/annotations.dart';
-import 'package:image_server/src/router/tab_bar_button.dart';
+import 'package:image_server/src/router/root.route.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    tabBarButton,
+    rootRoute,
   ],
 )
 class $AppRouter {}

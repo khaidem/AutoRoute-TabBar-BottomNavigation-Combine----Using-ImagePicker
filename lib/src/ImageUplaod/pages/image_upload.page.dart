@@ -65,7 +65,6 @@ class ImageUploadsPageState extends State<ImageUploadsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Column(
         children: [
           const SizedBox(
@@ -128,20 +127,20 @@ class ImageUploadsPageState extends State<ImageUploadsPage> {
                 : null,
             child: const Text('SUBMIT'),
           ),
-          ActionChip(
-              avatar: const CircleAvatar(
-                backgroundColor: Color.fromARGB(0, 250, 250, 250),
-                foregroundColor: Colors.black,
-                child: Icon(Icons.delete),
-              ),
-              label: const Text('Delete'),
-              clipBehavior: Clip.hardEdge,
-              tooltip: 'Delete the item',
-              onPressed: () {
-                setState(() {
-                  _photo = null;
-                });
-              }),
+          // ActionChip(
+          //     avatar: const CircleAvatar(
+          //       backgroundColor: Color.fromARGB(0, 250, 250, 250),
+          //       foregroundColor: Colors.black,
+          //       child: Icon(Icons.delete),
+          //     ),
+          //     label: const Text('Delete'),
+          //     clipBehavior: Clip.hardEdge,
+          //     tooltip: 'Delete the item',
+          //     onPressed: () {
+          //       setState(() {
+          //         _photo = null;
+          //       });
+          //     }),
         ],
       ),
     );
