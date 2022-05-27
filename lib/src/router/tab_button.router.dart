@@ -9,13 +9,28 @@ class RootTabPage extends StatelessWidget {
   Widget build(context) {
     return AutoTabsRouter.tabBar(
       routes: const [
-        ImageTab(),
-        NewUserTab(),
+        ImageUploadTab(),
+        MultiUploadTab(),
       ],
       builder: (context, child, controller) {
         // final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
-          drawer: const Drawer(),
+          drawer: Drawer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text(' Drawer'),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
 
           appBar: AppBar(
             title: Text(context.topRoute.name),
@@ -33,30 +48,58 @@ class RootTabPage extends StatelessWidget {
 
           /// ****************BottomNavigationBar***********///
 
-          bottomNavigationBar: buildBottomNav(context, context.tabsRouter),
+          // bottomNavigationBar: buildBottomNav(context, context.tabsRouter),
         );
       },
     );
   }
 
-  Widget buildBottomNav(BuildContext context, TabsRouter tabsRouter) {
-    return BottomNavigationBar(
-      currentIndex: tabsRouter.activeIndex,
-      onTap: tabsRouter.setActiveIndex,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.source),
-          label: 'Books',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.settings),
-        //   label: 'Settings',
-        // ),
-      ],
-    );
+  // Widget buildBottomNav(BuildContext context, TabsRouter tabsRouter) {
+  //   return BottomNavigationBar(
+  //     currentIndex: tabsRouter.activeIndex,
+  //     onTap: tabsRouter.setActiveIndex,
+  //     items: const [
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.source),
+  //         label: 'Books',
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.person),
+  //         label: 'Profile',
+  //       ),
+  //       // BottomNavigationBarItem(
+  //       //   icon: Icon(Icons.settings),
+  //       //   label: 'Settings',
+  //       // ),
+  //     ],
+  //   );
+  // }
+}
+
+class BottomNavigationPage extends StatelessWidget {
+  const BottomNavigationPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AutoTabsScaffold(
+        routes: const [
+          RootTabRouter(),
+          MenuRoute(),
+          NewUserRoute(),
+        ],
+        bottomNavigationBuilder: (_, tabsRouter) {
+          return BottomNavigationBar(
+            currentIndex: tabsRouter.activeIndex,
+            onTap: tabsRouter.setActiveIndex,
+            items: const [
+              BottomNavigationBarItem(
+                  label: 'Users', icon: Icon(Icons.offline_bolt)),
+              BottomNavigationBarItem(
+                  label: 'Posts', icon: Icon(Icons.arrow_back)),
+              BottomNavigationBarItem(
+                  label: 'Settings', icon: Icon(Icons.menu)),
+            ],
+          );
+        });
   }
 }

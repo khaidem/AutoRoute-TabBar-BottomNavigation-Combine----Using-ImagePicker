@@ -1,10 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 
 class MultiPickerPage extends StatefulWidget {
   const MultiPickerPage({Key? key}) : super(key: key);
@@ -35,42 +32,48 @@ class _MultiPickerPageState extends State<MultiPickerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text("Multiple Image Picker Flutter"),
-        ),
         body: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              //open button ----------------
-              ElevatedButton(
-                  onPressed: () {
-                    openImages();
-                  },
-                  child: Text("Open Images")),
-
-              Divider(),
-              Text("Picked Files:"),
-              Divider(),
-
-              imagefiles != null
-                  ? Wrap(
-                      children: imagefiles!.map((imageone) {
-                        return Container(
-                            child: Card(
-                          child: Container(
-                            height: 100,
-                            width: 100,
-                            child: Image.file(File(imageone.path)),
-                          ),
-                        ));
-                      }).toList(),
-                    )
-                  : Container()
-            ],
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          //open button ----------------
+          ElevatedButton(
+            onPressed: () {
+              openImages();
+            },
+            child: const Text("Pick Multi Image"),
           ),
-        ));
+
+          imagefiles != null
+              ? Wrap(
+                  children: imagefiles!.map((imageone) {
+                    return Card(
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.file(File(imageone.path)),
+                      ),
+                    );
+                  }).toList(),
+                )
+              : Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: Colors.grey[800],
+                  ),
+                ),
+          ElevatedButton(
+            onPressed: () {
+              openImages();
+            },
+            child: const Text("Submit"),
+          ),
+        ],
+      ),
+    ));
   }
 }
